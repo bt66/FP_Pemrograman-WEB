@@ -1,28 +1,28 @@
 const db = require('./connectDB');
 
 async function getMediaTransmission(){
-    const rows = await db.query(`SELECT * FROM product`);
+    const rows = await db.query(`SELECT * FROM mediaTransmission`);
     console.log( await rows);
   
     return await rows;
   }
   
   async function getMediaTransmissionId(data){
-    const rows = await db.query(`SELECT * FROM product WHERE id_product= ?`,[data.id_product]);
+    const rows = await db.query(`SELECT * FROM mediaTransmission WHERE id_mediaTransmission= ?`,[data]);
     console.log( await rows);
   
     return await rows;
   }
   
   async function addMediaTransmission(data){
-    const rows = await db.query(`INSERT INTO product (id_mediaTransmission, bandwidth, price, description) VALUE (?, ?, ?, ?)`,[data.id_mediaTransmission, data.bandwidth, data.price, data.description]);
+    const rows = await db.query(`INSERT INTO mediaTransmission (name, distance) VALUE (?, ?)`,[data.name, data.distance]);
     console.log( await rows);
   
     return await rows;
   }
   
-  async function updateMediaTransmission(data,productId){
-    const rows = await db.query(`UPDATE product SET id_mediaTransmission=?, bandwidth=?, price=?, description=? WHERE id_product= ?`,[data.id_mediaTransmission, data.bandwidth, data.price, data.description, productId]);
+  async function updateMediaTransmission(data,mediaTransmissionId){
+    const rows = await db.query(`UPDATE mediaTransmission SET name=?, distance=? WHERE id_mediaTransmission=?`,[data.name, data.distance, mediaTransmissionId]);
     if(rows )
     console.log( await rows);
   
@@ -31,7 +31,7 @@ async function getMediaTransmission(){
   
   
   async function deleteMediaTransmission(data){
-    const rows = await db.query(`DELETE FROM product WHERE id_product= ?`,[data.id_product]);
+    const rows = await db.query(`DELETE FROM mediaTransmission WHERE id_mediaTransmission= ?`,[data]);
     console.log( await rows);
   
     return await rows;

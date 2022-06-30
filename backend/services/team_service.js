@@ -1,28 +1,28 @@
 const db = require('./connectDB');
 
 async function getTeam(){
-    const rows = await db.query(`SELECT * FROM product`);
+    const rows = await db.query(`SELECT * FROM team`);
     console.log( await rows);
   
     return await rows;
   }
   
   async function getTeamId(data){
-    const rows = await db.query(`SELECT * FROM product WHERE id_product= ?`,[data.id_product]);
+    const rows = await db.query(`SELECT * FROM team WHERE nim= ?`,[data]);
     console.log( await rows);
   
     return await rows;
   }
   
   async function addTeam(data){
-    const rows = await db.query(`INSERT INTO product (id_mediaTransmission, bandwidth, price, description) VALUE (?, ?, ?, ?)`,[data.id_mediaTransmission, data.bandwidth, data.price, data.description]);
+    const rows = await db.query(`INSERT INTO team (nim, name, id_task, photo) VALUE (?, ?, ?, ?)`,[data.nim, data.name, data.id_task, data.photo]);
     console.log( await rows);
   
     return await rows;
   }
   
-  async function updateTeam(data,productId){
-    const rows = await db.query(`UPDATE product SET id_mediaTransmission=?, bandwidth=?, price=?, description=? WHERE id_product= ?`,[data.id_mediaTransmission, data.bandwidth, data.price, data.description, productId]);
+  async function updateTeam(data){
+    const rows = await db.query(`UPDATE team SET name=?, id_task=?, photo=? WHERE nim= ?`,[data.name, data.id_task, data.photo, data.nim]);
     if(rows )
     console.log( await rows);
   
@@ -31,7 +31,7 @@ async function getTeam(){
   
   
   async function deleteTeam(data){
-    const rows = await db.query(`DELETE FROM product WHERE id_product= ?`,[data.id_product]);
+    const rows = await db.query(`DELETE FROM team WHERE nim= ?`,[data]);
     console.log( await rows);
   
     return await rows;

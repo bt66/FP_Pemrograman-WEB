@@ -1,47 +1,47 @@
 const db = require('./connectDB');
 
 async function getHomeViewSetting(){
-    const rows = await db.query(`SELECT * FROM product`);
+    const rows = await db.query(`SELECT * FROM homeViewSetting`);
     console.log( await rows);
   
     return await rows;
-  }
-  
-  async function getHomeViewSettingId(data){
-    const rows = await db.query(`SELECT * FROM product WHERE id_product= ?`,[data.id_product]);
-    console.log( await rows);
-  
-    return await rows;
-  }
-  
-  async function addHomeViewSetting(data){
-    const rows = await db.query(`INSERT INTO product (id_mediaTransmission, bandwidth, price, description) VALUE (?, ?, ?, ?)`,[data.id_mediaTransmission, data.bandwidth, data.price, data.description]);
-    console.log( await rows);
-  
-    return await rows;
-  }
-  
-  async function updateHomeViewSetting(data,productId){
-    const rows = await db.query(`UPDATE product SET id_mediaTransmission=?, bandwidth=?, price=?, description=? WHERE id_product= ?`,[data.id_mediaTransmission, data.bandwidth, data.price, data.description, productId]);
-    if(rows )
-    console.log( await rows);
-  
-    return await rows;
-  }
-  
-  
-  async function deleteHomeViewSetting(data){
-    const rows = await db.query(`DELETE FROM product WHERE id_product= ?`,[data.id_product]);
-    console.log( await rows);
-  
-    return await rows;
-  }
+}
+
+async function getHomeViewSettingId(data){
+  const rows = await db.query(`SELECT * FROM homeViewSetting WHERE id_content= ?`,[data]);
+  console.log( await rows);
+
+  return await rows;
+}
+
+async function addHomeViewSetting(data){
+  const rows = await db.query(`INSERT INTO homeViewSetting (content, image_url) VALUE (?, ?)`,[data.content, data.image_url]);
+  console.log( await rows);
+
+  return await rows;
+}
+
+async function updateHomeViewSetting(data,idHomeView){
+  const rows = await db.query(`UPDATE homeViewSetting SET content=?, image_url=? WHERE id_content= ?`,[data.content, data.image_url, idHomeView]);
+  if(rows )
+  console.log( await rows);
+
+  return await rows;
+}
+
+
+async function deleteHomeViewSetting(data){
+  const rows = await db.query(`DELETE FROM homeViewSetting WHERE id_content= ?`,[data]);
+  console.log( await rows);
+
+  return await rows;
+}
   
   
 module.exports = {
-    getHomeViewSetting,
-    getHomeViewSettingId,
-    addHomeViewSetting,
-    updateHomeViewSetting,
-    deleteHomeViewSetting
+  getHomeViewSetting,
+  getHomeViewSettingId,
+  addHomeViewSetting,
+  updateHomeViewSetting,
+  deleteHomeViewSetting
 }
